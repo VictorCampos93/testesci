@@ -1,5 +1,9 @@
 language: ruby
 
+install: skip
+
+script: skip
+
 before_deploy:
   - echo "mais um teste" >> teste.txt
   - zip -r latest *
