@@ -1,4 +1,4 @@
- language: ruby
+language: ruby
 
 before_deploy:
   - echo "mais um teste" >> teste.txt
