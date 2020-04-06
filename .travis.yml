@@ -13,9 +13,8 @@ before_deploy:
 deploy:
 
   - provider: s3
-    access_key_id: ASIA27R4PQFKW352L6PE
-    secret_access_key: 
-      secure: b6dx9Y5NyBWxCI5ak46BCc/Q+zpDyJ5FToB4Xazb
+    access_key_id: $AWS_ACCESS_ID
+    secret_access_key: $AWS_SECRET_ID
     local_dir: dpl_cd_upload
     skip_cleanup: true
     on: &2
@@ -23,9 +22,8 @@ deploy:
     bucket: testedataner
 
   - provider: codedeploy
-    access_key_id: ASIA27R4PQFKW352L6PE
-    secret_access_key: 
-      secure: b6dx9Y5NyBWxCI5ak46BCc/Q+zpDyJ5FToB4Xazb
+    access_key_id: $AWS_ACCESS_ID
+    secret_access_key: $AWS_SECRET_ID
     bucket: testedataner
     key: latest.zip
     application: CatPartyDemoApplication
