@@ -5,7 +5,7 @@ install: skip
 script: skip
 
 addons:
-  ssh_known_hosts: <deploy-host>
+  ssh_known_hosts: 18.233.170.146
 
 before_deploy:
   - echo "mais um teste" >> teste.txt
