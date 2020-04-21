@@ -4,28 +4,19 @@ install: skip
 
 script: skip
 
+addons:
+  ssh_known_hosts: <deploy-host>
+
 before_deploy:
   - echo "mais um teste" >> teste.txt
   - zip -r latest *
   - mkdir -p dpl_cd_upload
   - mv latest.zip dpl_cd_upload/latest.zip
+  - echo $DEPLOY_KEY >> chave.pem
 
 deploy:
-
-  - provider: s3
-    access_key_id: $AWS_ACCESS_ID
-    secret_access_key: $AWS_SECRET_ID
-    local_dir: dpl_cd_upload
-    skip_cleanup: true
-    on: &2
-      repo: VictorCampos93/testesci
-    bucket: testedataner
-
-  - provider: codedeploy
-    access_key_id: $AWS_ACCESS_ID
-    secret_access_key: $AWS_SECRET_ID
-    bucket: testedataner
-    key: latest.zip
-    application: CatPartyDemoApplication
-    deployment_group: MyDeploymentGroup
-    on: *2
+  provider: script
+  skip_cleanup: true
+  script: scp -i chave.pem -r dpl_cd_upload ec2-user@18.233.170.146:/home/ec2-user/
+  on:
+    branch: master
